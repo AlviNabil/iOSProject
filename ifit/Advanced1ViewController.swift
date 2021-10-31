@@ -14,6 +14,8 @@ class Advanced1ViewController: UIViewController,UITableViewDelegate,UITableViewD
 
     var refUser: DatabaseReference!
     @IBOutlet var table: UITableView!
+    @IBOutlet var topname5: UILabel!
+    var fcount = 0
     
     @IBOutlet weak var buttonConfirm: UIButton!
     
@@ -26,6 +28,7 @@ class Advanced1ViewController: UIViewController,UITableViewDelegate,UITableViewD
         table.delegate=self
         table.dataSource=self
         refUser = Database.database().reference().child("users")
+        topname5.text = "Day \(fcount+1)"
 
         
     }
@@ -75,8 +78,8 @@ class Advanced1ViewController: UIViewController,UITableViewDelegate,UITableViewD
    
                "details": String(a) as String
            ]
-           refUser.child(key!).setValue(user)
-   
+        var st = String(fcount+1)
+        refUser.child(key!).child("Advanced").child("Day \(st)").setValue(user)
        }
        @IBAction func confirmTapped(_ sender: UIButton) {
    

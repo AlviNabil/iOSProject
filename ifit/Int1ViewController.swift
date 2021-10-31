@@ -15,8 +15,8 @@ class Int1ViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     var refUser: DatabaseReference!
     @IBOutlet var table: UITableView!
     
-    @IBOutlet weak var buttonConfirm: UIButton!
-    
+    @IBOutlet var topname3: UILabel!
+    var fcount = 0
     var list = ["Barbell Squats x15","Walking Lunges x10","Deadlifts x5","Treadmill 10 Minutes","Plate Transfer Plank 60 Seconds"]
     let array = [20,5,15,10,12]
     var flag = [0,0,0,0,0]
@@ -26,7 +26,7 @@ class Int1ViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         table.delegate=self
         table.dataSource=self
         refUser = Database.database().reference().child("users")
-
+        topname3.text = "Day \(fcount+1)"
         
     }
     
@@ -75,7 +75,8 @@ class Int1ViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
    
                "details": String(a) as String
            ]
-           refUser.child(key!).setValue(user)
+        var st = String(fcount+1)
+        refUser.child(key!).child("Intermediate").child("Day \(st)").setValue(user)
    
        }
        @IBAction func confirmTapped(_ sender: UIButton) {

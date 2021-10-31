@@ -6,10 +6,15 @@
 //
 
 import UIKit
-
+import FirebaseDatabase
+import FirebaseAuth
 class beginnerViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var count = 0
+    @IBOutlet var beginnerName: UILabel!
+    @IBOutlet var tillButton: UILabel!
+    var ref: DatabaseReference?
+    var databaseHandle: DatabaseHandle?
     
     
     var list = ["Day 1","Day 2","Day 3","Day 4","Day 5","Day 6","Day 7","Day 8","Day 9","Day 10","Day 11","Day 12","Day 13","Day 14"]
@@ -31,11 +36,35 @@ class beginnerViewController: UIViewController, UITableViewDataSource, UITableVi
             performSegue(withIdentifier: "exercise1", sender: self)
         }
     }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(count == -1200){
+            count = 0
+        }
+        else if(count%2==1){
+            var vc = segue.destination as! Beg2ViewController
+            vc.fcount = count
+        }
+        else{
+            var vc = segue.destination as! Beg1ViewController
+            vc.fcount = count
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        beginnerName.text = "Beginner Level"
         // Do any additional setup after loading the view.
+        let key  = Auth.auth().currentUser?.uid
+        ref = Database.database().reference()
+        databaseHandle = ref?.child("users").child(key!).child("Beginner").child("DayTill").observe(.value, with: { (snapshot) in
+            let value = snapshot.value as? Int
+            
+            //code to execute to get the value
+            self.tillButton.text = "You have completed till Beginner Day \(value!)"
+        })
+    }
+    @IBAction func backTapped(_ sender: UIButton) {
+        count = -1200
     }
     
 

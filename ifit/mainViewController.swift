@@ -10,10 +10,10 @@ import Firebase
 
 class mainViewController: UIViewController {
 
-    
+    @IBOutlet var planNames: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        planNames.text = "Workout Plans"
         // Do any additional setup after loading the view.
     }
     

@@ -13,8 +13,10 @@ import FirebaseDatabase
 class Beg2ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
 
     var refUser: DatabaseReference!
-    
+    var fcount = 0
     @IBOutlet weak var table2: UITableView!
+    @IBOutlet var topname2: UILabel!
+    var databaseHandle: DatabaseHandle?
     var list = ["Mountain Climb x30","Plank 30 Seconds","Squats x10","Leg Raise x10","Running 1KM"]
     let array = [12,15,12,8,10]
     var flag = [0,0,0,0,0]
@@ -26,7 +28,7 @@ class Beg2ViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         
         refUser = Database.database().reference().child("users")
         
-
+        topname2.text = "Day \(fcount+1)"
         
     }
     
@@ -75,13 +77,24 @@ class Beg2ViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
    
                "details": String(a) as String
            ]
-           refUser.child(key!).setValue(user)
-   
+            var st = String(fcount+1)
+        refUser.child(key!).child("Beginner").child("Day \(st)").setValue(user)
+        if(fcount == 0){
+            refUser.child(key!).child("Beginner").child("DayTill").setValue(1)
+        }
+        databaseHandle = refUser?.child(key!).child("Beginner").child("DayTill").observe(.value, with: { (snapshot) in
+            let ivalue = snapshot.value as? Int
+           
+            var ivalue2 = Int(ivalue!)
+            if(ivalue2<self.fcount+1){
+                self.refUser.child(key!).child("Beginner").child("DayTill").setValue(self.fcount+1)
+            }
+        })
        }
-       @IBAction func confirmTapped(_ sender: UIButton) {
-   
-           addinfo()
-       }
+    @IBAction func confirmTapped2(_ sender: UIButton) {
+        
+        addinfo()
+    }
     
     
 //    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

@@ -14,8 +14,9 @@ class Beg1ViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
 
     var refUser: DatabaseReference!
     @IBOutlet var table: UITableView!
-    
-    @IBOutlet weak var buttonConfirm: UIButton!
+    @IBOutlet var topname: UILabel!
+    var databaseHandle: DatabaseHandle?
+    var fcount = 0
     
     var list = ["Jumping Jacks x20","PushUp x5","Squats x10","Situps x5","Lunges x10"]
     let array = [16,2,12,3,3]
@@ -26,7 +27,7 @@ class Beg1ViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         table.delegate=self
         table.dataSource=self
         refUser = Database.database().reference().child("users")
-
+        topname.text = "Day \(fcount+1)"
         
     }
     
@@ -75,11 +76,22 @@ class Beg1ViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
    
                "details": String(a) as String
            ]
-           refUser.child(key!).setValue(user)
+        var st = String(fcount+1)
+        refUser.child(key!).child("Beginner").child("Day \(st)").setValue(user)
+        if(fcount == 0){
+            refUser.child(key!).child("Beginner").child("DayTill").setValue(1)
+        }
+        databaseHandle = refUser?.child(key!).child("Beginner").child("DayTill").observe(.value, with: { (snapshot) in
+            let ivalue = snapshot.value as? Int
+           
+            var ivalue2 = Int(ivalue!)
+            if(ivalue2<self.fcount+1){
+                self.refUser.child(key!).child("Beginner").child("DayTill").setValue(self.fcount+1)
+            }
+        })
    
        }
        @IBAction func confirmTapped(_ sender: UIButton) {
-   
            addinfo()
        }
     

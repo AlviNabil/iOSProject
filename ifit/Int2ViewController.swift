@@ -13,7 +13,8 @@ import FirebaseDatabase
 class Int2ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
 
     var refUser: DatabaseReference!
-    
+    var fcount = 0
+    @IBOutlet var topname4: UILabel!
     @IBOutlet weak var table2: UITableView!
     var list = ["Hip Hinge Variant x10","Tricep Dips x15","Russian Twist x10","Burpees x20","Running 3KM"]
     let array = [17,15,18,20,25]
@@ -26,7 +27,7 @@ class Int2ViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         
         refUser = Database.database().reference().child("users")
         
-
+        topname4.text = "Day \(fcount+1)"
         
     }
     
@@ -75,7 +76,9 @@ class Int2ViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
    
                "details": String(a) as String
            ]
-           refUser.child(key!).setValue(user)
+        var st = String(fcount+1)
+        refUser.child(key!).child("Intermediate").child("Day \(st)").setValue(user)
+
    
        }
        @IBAction func confirmTapped(_ sender: UIButton) {

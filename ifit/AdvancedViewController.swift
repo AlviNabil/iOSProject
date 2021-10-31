@@ -10,7 +10,7 @@ import UIKit
 class AdvancedViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var count = 0
-    
+    @IBOutlet var AdvancedName: UILabel!
     
     var list = ["Day 1","Day 2","Day 3","Day 4","Day 5","Day 6","Day 7","Day 8","Day 9","Day 10","Day 11","Day 12","Day 13","Day 14","Day 15","Day 16","Day 17","Day 18","Day 19","Day 20","Day 21","Day 22","Day 23","Day 24","Day 25","Day 25","Day 26","Day 27","Day 28","Day 29","Day 30"]
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -31,13 +31,28 @@ class AdvancedViewController: UIViewController, UITableViewDataSource, UITableVi
             performSegue(withIdentifier: "exercise5", sender: self)
         }
     }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(count == -1200){
+            count = 0
+        }
+        else if(count%2==1){
+            var vc = segue.destination as! Advanced2ViewController
+            vc.fcount = count
+        }
+        else{
+            var vc = segue.destination as! Advanced1ViewController
+            vc.fcount = count
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        AdvancedName.text = "Advanced Level"
         // Do any additional setup after loading the view.
     }
     
-
+    @IBAction func backTapped(_ sender: UIButton) {
+        count = -1200
+    }
     
 }

@@ -15,6 +15,8 @@ class Advanced2ViewController: UIViewController,UITableViewDelegate,UITableViewD
     var refUser: DatabaseReference!
     
     @IBOutlet weak var table2: UITableView!
+    @IBOutlet var topname6: UILabel!
+    var fcount = 0
     var list = ["Deadlift x10","Single Arm Pullup x10","Planche Pushup x10","Archer Squat x15","Buttkicks x15"]
     let array = [22,25,25,30,25]
     var flag = [0,0,0,0,0]
@@ -25,7 +27,7 @@ class Advanced2ViewController: UIViewController,UITableViewDelegate,UITableViewD
         table2.dataSource=self
         
         refUser = Database.database().reference().child("users")
-        
+        topname6.text = "Day \(fcount+1)"
 
         
     }
@@ -75,7 +77,8 @@ class Advanced2ViewController: UIViewController,UITableViewDelegate,UITableViewD
    
                "details": String(a) as String
            ]
-           refUser.child(key!).setValue(user)
+        var st = String(fcount+1)
+        refUser.child(key!).child("Advanced").child("Day \(st)").setValue(user)
    
        }
        @IBAction func confirmTapped(_ sender: UIButton) {
