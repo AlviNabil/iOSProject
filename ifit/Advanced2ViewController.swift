@@ -16,6 +16,7 @@ class Advanced2ViewController: UIViewController,UITableViewDelegate,UITableViewD
     
     @IBOutlet weak var table2: UITableView!
     @IBOutlet var topname6: UILabel!
+    var databaseHandle: DatabaseHandle?
     var fcount = 0
     var list = ["Deadlift x10","Single Arm Pullup x10","Planche Pushup x10","Archer Squat x15","Buttkicks x15"]
     let array = [22,25,25,30,25]
@@ -73,13 +74,23 @@ class Advanced2ViewController: UIViewController,UITableViewDelegate,UITableViewD
     func addinfo(){
            let key = Auth.auth().currentUser?.uid
            let user = [
-               "id": key,
+               
    
-               "details": String(a) as String
+               "CalorieBurned": String(a) as String
            ]
         var st = String(fcount+1)
         refUser.child(key!).child("Advanced").child("Day \(st)").setValue(user)
-   
+        if(fcount == 0){
+            refUser.child(key!).child("Advanced").child("DayTill").setValue(1)
+        }
+        databaseHandle = refUser?.child(key!).child("Advanced").child("DayTill").observe(.value, with: { (snapshot) in
+            let ivalue = snapshot.value as? Int
+           
+            var ivalue2 = Int(ivalue!)
+            if(ivalue2<self.fcount+1){
+                self.refUser.child(key!).child("Advanced").child("DayTill").setValue(self.fcount+1)
+            }
+        })
        }
        @IBAction func confirmTapped(_ sender: UIButton) {
    

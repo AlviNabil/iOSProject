@@ -14,7 +14,7 @@ class Int1ViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
 
     var refUser: DatabaseReference!
     @IBOutlet var table: UITableView!
-    
+    var databaseHandle: DatabaseHandle?
     @IBOutlet var topname3: UILabel!
     var fcount = 0
     var list = ["Barbell Squats x15","Walking Lunges x10","Deadlifts x5","Treadmill 10 Minutes","Plate Transfer Plank 60 Seconds"]
@@ -71,13 +71,21 @@ class Int1ViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     func addinfo(){
            let key = Auth.auth().currentUser?.uid
            let user = [
-               "id": key,
-   
-               "details": String(a) as String
+            "CalorieBurned": String(a) as String
            ]
         var st = String(fcount+1)
         refUser.child(key!).child("Intermediate").child("Day \(st)").setValue(user)
-   
+        if(fcount == 0){
+            refUser.child(key!).child("Intermediate").child("DayTill").setValue(1)
+        }
+        databaseHandle = refUser?.child(key!).child("Intermediate").child("DayTill").observe(.value, with: { (snapshot) in
+            let ivalue = snapshot.value as? Int
+           
+            var ivalue2 = Int(ivalue!)
+            if(ivalue2<self.fcount+1){
+                self.refUser.child(key!).child("Intermediate").child("DayTill").setValue(self.fcount+1)
+            }
+        })
        }
        @IBAction func confirmTapped(_ sender: UIButton) {
    

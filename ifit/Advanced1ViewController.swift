@@ -15,6 +15,7 @@ class Advanced1ViewController: UIViewController,UITableViewDelegate,UITableViewD
     var refUser: DatabaseReference!
     @IBOutlet var table: UITableView!
     @IBOutlet var topname5: UILabel!
+    var databaseHandle: DatabaseHandle?
     var fcount = 0
     
     @IBOutlet weak var buttonConfirm: UIButton!
@@ -74,12 +75,21 @@ class Advanced1ViewController: UIViewController,UITableViewDelegate,UITableViewD
     func addinfo(){
            let key = Auth.auth().currentUser?.uid
            let user = [
-               "id": key,
-   
-               "details": String(a) as String
+            "CalorieBurned": String(a) as String
            ]
         var st = String(fcount+1)
         refUser.child(key!).child("Advanced").child("Day \(st)").setValue(user)
+        if(fcount == 0){
+            refUser.child(key!).child("Advanced").child("DayTill").setValue(1)
+        }
+        databaseHandle = refUser?.child(key!).child("Advanced").child("DayTill").observe(.value, with: { (snapshot) in
+            let ivalue = snapshot.value as? Int
+           
+            var ivalue2 = Int(ivalue!)
+            if(ivalue2<self.fcount+1){
+                self.refUser.child(key!).child("Advanced").child("DayTill").setValue(self.fcount+1)
+            }
+        })
        }
        @IBAction func confirmTapped(_ sender: UIButton) {
    

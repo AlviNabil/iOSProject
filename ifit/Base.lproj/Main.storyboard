@@ -506,9 +506,16 @@
                                 <rect key="frame" x="0.0" y="106" width="414" height="790"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <label key="tableHeaderView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="VW8-Cm-BU3">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="days" id="2mS-dK-YyN">
-                                        <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="88.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2mS-dK-YyN" id="PuM-Wa-RLG">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -536,6 +543,7 @@
                     <navigationItem key="navigationItem" id="W0M-B9-ggX"/>
                     <connections>
                         <outlet property="IntermediateName" destination="EaK-pC-xOb" id="9NP-dE-1QL"/>
+                        <outlet property="tillButton" destination="VW8-Cm-BU3" id="aC2-yY-5xD"/>
                         <segue destination="rjs-ls-dEZ" kind="presentation" identifier="exercise2" modalPresentationStyle="fullScreen" id="GXQ-aY-zDF"/>
                         <segue destination="cPx-il-gEm" kind="presentation" identifier="exercise3" modalPresentationStyle="fullScreen" id="l3U-YI-JyJ"/>
                     </connections>
@@ -710,9 +718,16 @@
                                 <rect key="frame" x="0.0" y="106" width="414" height="790"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <label key="tableHeaderView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jU8-3X-Ost">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="days" id="KF3-BF-C9T">
-                                        <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="88.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KF3-BF-C9T" id="iUg-zK-nyE">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -740,6 +755,7 @@
                     <navigationItem key="navigationItem" id="RGy-ge-QN8"/>
                     <connections>
                         <outlet property="AdvancedName" destination="bmZ-Pm-JIm" id="PpR-5O-bCQ"/>
+                        <outlet property="tillButton" destination="jU8-3X-Ost" id="dz0-na-Vgz"/>
                         <segue destination="8u4-Eq-VWm" kind="presentation" identifier="exercise4" modalPresentationStyle="fullScreen" id="x6V-Hs-ZmL"/>
                         <segue destination="iXq-Uf-axl" kind="presentation" identifier="exercise5" modalPresentationStyle="fullScreen" id="gZz-Ef-QQr"/>
                     </connections>
@@ -894,7 +910,7 @@
         <segue reference="Z5m-tL-nLn"/>
         <segue reference="uJ5-P1-Xyo"/>
         <segue reference="M7Y-jK-hqM"/>
-        <segue reference="PRk-bH-PWf"/>
+        <segue reference="7ro-ej-Nde"/>
     </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="systemBackgroundColor">

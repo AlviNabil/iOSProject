@@ -72,9 +72,8 @@ class Beg1ViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     func addinfo(){
            let key = Auth.auth().currentUser?.uid
            let user = [
-               "id": key,
    
-               "details": String(a) as String
+               "CalorieBurned": String(a) as String
            ]
         var st = String(fcount+1)
         refUser.child(key!).child("Beginner").child("Day \(st)").setValue(user)

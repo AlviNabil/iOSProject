@@ -6,11 +6,16 @@
 //
 
 import UIKit
+import FirebaseDatabase
+import FirebaseAuth
 
 class AdvancedViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var count = 0
     @IBOutlet var AdvancedName: UILabel!
+    @IBOutlet var tillButton: UILabel!
+    var ref: DatabaseReference?
+    var databaseHandle: DatabaseHandle?
     
     var list = ["Day 1","Day 2","Day 3","Day 4","Day 5","Day 6","Day 7","Day 8","Day 9","Day 10","Day 11","Day 12","Day 13","Day 14","Day 15","Day 16","Day 17","Day 18","Day 19","Day 20","Day 21","Day 22","Day 23","Day 24","Day 25","Day 25","Day 26","Day 27","Day 28","Day 29","Day 30"]
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -49,6 +54,16 @@ class AdvancedViewController: UIViewController, UITableViewDataSource, UITableVi
         super.viewDidLoad()
         AdvancedName.text = "Advanced Level"
         // Do any additional setup after loading the view.
+        let key  = Auth.auth().currentUser?.uid
+        ref = Database.database().reference()
+        databaseHandle = ref?.child("users").child(key!).child("Advanced").child("DayTill").observe(.value, with: { (snapshot) in
+            var value = snapshot.value as? Int
+            if value == nil {
+                value = 0
+            }
+            //code to execute to get the value
+            self.tillButton.text = "You have completed till Advanced Day \(value!)"
+        })
     }
     
     @IBAction func backTapped(_ sender: UIButton) {

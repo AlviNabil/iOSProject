@@ -57,7 +57,10 @@ class beginnerViewController: UIViewController, UITableViewDataSource, UITableVi
         let key  = Auth.auth().currentUser?.uid
         ref = Database.database().reference()
         databaseHandle = ref?.child("users").child(key!).child("Beginner").child("DayTill").observe(.value, with: { (snapshot) in
-            let value = snapshot.value as? Int
+            var value = snapshot.value as? Int
+            if value == nil {
+                value = 0
+            }
             
             //code to execute to get the value
             self.tillButton.text = "You have completed till Beginner Day \(value!)"
