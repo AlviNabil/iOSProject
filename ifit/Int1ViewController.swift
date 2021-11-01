@@ -79,8 +79,10 @@ class Int1ViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             refUser.child(key!).child("Intermediate").child("DayTill").setValue(1)
         }
         databaseHandle = refUser?.child(key!).child("Intermediate").child("DayTill").observe(.value, with: { (snapshot) in
-            let ivalue = snapshot.value as? Int
-           
+            var ivalue = snapshot.value as? Int
+            if ivalue==nil{
+                ivalue = 0
+            }
             var ivalue2 = Int(ivalue!)
             if(ivalue2<self.fcount+1){
                 self.refUser.child(key!).child("Intermediate").child("DayTill").setValue(self.fcount+1)
